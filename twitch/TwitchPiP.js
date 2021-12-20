@@ -4,6 +4,7 @@
 // @version      1.0
 // @description  Add a PiP button on Twitch player
 // @author       Yoshin
+// @license      MIT
 // @match        https://www.twitch.tv/*
 // @icon         https://www.google.com/s2/favicons?domain=twitch.tv
 // @grant        none
