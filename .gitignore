@@ -1,0 +1,18 @@
+# JetBrains
+.idea/
+*.iml
+modules.xml
+.idea/misc.xml
+*.ipr
+
+# Javascript
+logs
+*.log
+*.tgz
+*.tar.gz
+*.txz
+*.tar.xz
+pids
+*.pid
+*.seed
+*.pid.lock
