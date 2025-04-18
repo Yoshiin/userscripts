@@ -1,13 +1,13 @@
 // ==UserScript==
 // @name         TwitchAPI
 // @namespace    https://github.com/Yoshiin/userscripts/
-// @version      1.0
+// @version      1.1
 // @description  A Twitch API lib for Userscripts
 // @author       Yoshin <l.mora@outlook.fr> (https://github.com/Yoshiin/)
 // ==/UserScript==
 /*
 * TwitchAPI.js
-* v1.0.0
+* v1.1.0
 */
 class TwitchAPI {
     #clientId;
@@ -79,7 +79,7 @@ class TwitchAPI {
         }
         const lsData = JSON.parse(localStorage.getItem(`${this.#storageKey}:twitchApiData`));
         if (lsData.expirationDate < Date.now()) {
-            logger.error('Outdated access_token, cannot fetch /videos', 'TwitchAPI');
+            this.#cLogger('error', 'Outdated access_token, cannot fetch /videos');
             return undefined;
         } else {
             const lastVodRequestData = await this.#fetchWithTimeout(`https://api.twitch.tv/helix/videos?user_id=${userData.id}&first=1&sort=time&type=archive`);
@@ -101,7 +101,7 @@ class TwitchAPI {
         }
         const lsData = JSON.parse(localStorage.getItem(`${this.#storageKey}:twitchApiData`));
         if (lsData.expirationDate < Date.now()) {
-            logger.error('Outdated access_token, cannot fetch /users', 'TwitchAPI');
+            this.#cLogger('error', 'Outdated access_token, cannot fetch /users');
             return undefined;
         } else {
             const userRequestData = await this.#fetchWithTimeout(`https://api.twitch.tv/helix/users?login=${userName}`);
@@ -151,7 +151,7 @@ class TwitchAPI {
             }
         }
         if (needToUpdate) {
-            logger.info('Requesting Twitch Access Token...', 'TwitchAPI');
+            this.#cLogger('info', 'Requesting Twitch Access Token...');
             const auth = await this.#fetchWithTimeout(
                 `https://id.twitch.tv/oauth2/token?client_id=${this.#clientId}&client_secret=${this.#clientSecret}&grant_type=client_credentials`,
                 'POST', false
